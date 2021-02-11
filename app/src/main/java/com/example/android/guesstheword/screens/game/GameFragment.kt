@@ -17,6 +17,7 @@
 package com.example.android.guesstheword.screens.game
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
 import timber.log.Timber
+import java.io.ObjectStreamException
 
 /**
  * Fragment where the game is played
@@ -73,6 +75,10 @@ class GameFragment : Fragment() {
                 gameFinished()
                 viewModel.onGameFinishComplete()
             }
+        })
+
+        viewModel.timerCount.observe(viewLifecycleOwner, Observer { newCount ->
+            binding.timerText.text = DateUtils.formatElapsedTime(newCount / 1000)
         })
 
         return binding.root
