@@ -62,6 +62,7 @@ class GameViewModel : ViewModel() {
             }
         }
 
+        nextWord()
         timer.start()
     }
 
